@@ -2,6 +2,7 @@
 
 jimport('joomla.plugin.plugin');
 
+// http://ogp.me/
 class plgContentBbOpenGraph extends JPlugin
 {
 
