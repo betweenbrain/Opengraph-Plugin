@@ -11,6 +11,6 @@
 	<description>PLG_CONTENT_BBOPENGRAPH_DESC</description>
 	<files>
 		<filename plugin="bbopengraph">bbopengraph.php</filename>
-
+		<folder>language</folder>
 	</files>
 </extension>
