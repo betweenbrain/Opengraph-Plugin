@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>plg_content_bbopengraph</name>
+	<author>Matt Thomas</author>
+	<creationDate>June 28th, 2012</creationDate>
+	<copyright>(C) 2012 Matt Thomas. All rights reserved.</copyright>
+	<license>GNU/GPL</license>
+	<authorEmail>matt@betweenbrain.com</authorEmail>
+	<authorUrl>www.betweenbrain.com</authorUrl>
+	<version>0.1</version>
+	<description>PLG_CONTENT_BBOPENGRAPH_DESC</description>
+	<files>
+		<filename plugin="bbopengraph">bbopengraph.php</filename>
+
+	</files>
+</extension>
