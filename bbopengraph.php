@@ -3,9 +3,9 @@
 /**
  * Simple plugin for implementing the Open Graph protocol - http://ogp.me/
  *
- * @package		Joomla.Plugin
- * @copyright	Copyright (C) 2012 Matt Thomas http://betweenbrain.com. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package        Joomla.Plugin
+ * @copyright      Copyright (C) 2012 Matt Thomas http://betweenbrain.com. All rights reserved.
+ * @license        GNU General Public License version 2 or later; see LICENSE.txt
  *
  */
 
@@ -13,8 +13,6 @@ jimport('joomla.plugin.plugin');
 
 class plgContentBbOpenGraph extends JPlugin
 {
-
-	// public $count = 0;
 
 	public function __construct(& $subject, $config)
 	{
@@ -24,33 +22,14 @@ class plgContentBbOpenGraph extends JPlugin
 
 	public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
 	{
+		static $count = 0;
 
-		$app  = JFactory::getApplication();
-		$doc  = JFactory::getDocument();
-		// $view = JRequest::getCmd('view');
+		$app = JFactory::getApplication();
+		$doc = JFactory::getDocument();
 
-		if ($app->isAdmin()) {
+		if ($app->isAdmin() || $count > 0) {
 			return true;
 		}
-
-		if (!empty($this->lead_items)) {
-			die;
-		}
-
-		// TODO: Figure out accessing only first row of blog views
-
-		// if ($view == 'featured' && $this->count == 0) { }
-
-		// var_dump($row);
-
-		// var_dump(get_object_vars($row));
-
-		/*
-		$rows = get_object_vars($row);
-		foreach ($rows as $key => $value) {
-			return 'Key: ' . $key . ' Value: ' . $value;
-		}
-		*/
 
 		// The canonical URL of the page.
 		$doc->setMetadata('og:url', JURI::current());
@@ -76,5 +55,8 @@ class plgContentBbOpenGraph extends JPlugin
 		if (isset($image[1]) && $image[1] != '') {
 			$doc->setMetadata('og:image', JURI::base() . $image[1]);
 		}
+
+		$count++;
+		return true;
 	}
 }
