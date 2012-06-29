@@ -57,6 +57,5 @@ class plgContentBbOpenGraph extends JPlugin
 		}
 
 		$count++;
-		return true;
 	}
 }
