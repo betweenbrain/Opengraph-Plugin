@@ -30,6 +30,8 @@ class plgContentBbOpenGraph extends JPlugin
 		$view   = JRequest::getVar('view', '');
 		$scope  = $option . '.' . $view;
 
+		//TODO: Do we want to use site configuration data for featured view or default menu item?
+
 		// Ensure that we are not in the back-end, or haven't run before in category views, and are in the right scope. Phew!
 		if (!$app->isAdmin() && ($count == 0) && (in_array($scope, array('com_content.article', 'com_content.category', 'com_content.featured')))) {
 
@@ -48,7 +50,9 @@ class plgContentBbOpenGraph extends JPlugin
 
 			// A description of the object.
 			if (isset($row->introtext)) {
-				$doc->setMetadata('og:description', substr(strip_tags($row->introtext), 0, 255));
+				// First 255 characters of the introtext, sans HTML, with extra spaces removed.
+				$description = preg_replace("/\s{2,}/", " ", substr(strip_tags($row->introtext), 0, 255));
+				$doc->setMetadata('og:description', $description . '...');
 			}
 
 			// An image URL which represents the object
