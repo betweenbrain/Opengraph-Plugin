@@ -24,38 +24,42 @@ class plgContentBbOpenGraph extends JPlugin
 	{
 		static $count = 0;
 
-		$app = JFactory::getApplication();
-		$doc = JFactory::getDocument();
+		$app    = JFactory::getApplication();
+		$doc    = JFactory::getDocument();
+		$option = JRequest::getVar('option', '');
+		$view   = JRequest::getVar('view', '');
 
-		if ($app->isAdmin() || $count > 0) {
-			return true;
+		echo '<pre>View: ' . $view . '<br/>Option: ' . $option . '<br/>Context: ' . $context . '<br/></pre>';
+
+		// Ensure that we are not in the back-end, or haven't run before, and are in the right context
+		if (!$app->isAdmin() && ($count == 0) && ($context == 'com_content.article')) {
+
+			// The canonical URL of the page.
+			$doc->setMetadata('og:url', JURI::current());
+
+			// The type of object.
+			$doc->setMetadata('og:type', 'article');
+
+			// The title of the object.
+			$title = str_replace(array('"', "'"), '', $row->title);
+
+			if (isset($row->title)) {
+				$doc->setMetadata('og:title', htmlspecialchars($title));
+			}
+
+			// A description of the object.
+			if (isset($row->introtext)) {
+				$doc->setMetadata('og:description', substr(strip_tags($row->introtext), 0, 255));
+			}
+
+			// An image URL which represents the object
+			preg_match('/<img.+src=[\"]([^\"]+)[\"].*>/i', $row->introtext, $image);
+
+			if (isset($image[1]) && $image[1] != '') {
+				$doc->setMetadata('og:image', JURI::base() . $image[1]);
+			}
+
+			$count++;
 		}
-
-		// The canonical URL of the page.
-		$doc->setMetadata('og:url', JURI::current());
-
-		// The type of object.
-		$doc->setMetadata('og:type', 'article');
-
-		// The title of the object.
-		$title = str_replace(array('"', "'"), '', $row->title);
-
-		if (isset($row->title)) {
-			$doc->setMetadata('og:title', htmlspecialchars($title));
-		}
-
-		// A description of the object.
-		if (isset($row->introtext)) {
-			$doc->setMetadata('og:description', substr(strip_tags($row->introtext), 0, 255));
-		}
-
-		// An image URL which represents the object
-		preg_match('/<img.+src=[\"]([^\"]+)[\"].*>/i', $row->introtext, $image);
-
-		if (isset($image[1]) && $image[1] != '') {
-			$doc->setMetadata('og:image', JURI::base() . $image[1]);
-		}
-
-		$count++;
 	}
 }
