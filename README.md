@@ -1,4 +1,3 @@
-joomla-opengraph-plugin
-=======================
+A simple Joomla 2.5 plugin for implementing the Open Graph protocol on your Joomla! website.
 
-A Joomla 2.5 plugin to add basic Open Graph metadata tags
+Learn more about The Open Graph Protocol at http://ogp.me/
