@@ -25,15 +25,38 @@ class plgContentBbOpenGraph extends JPlugin
 		static $count = 0;
 
 		$app    = JFactory::getApplication();
+		$config = JFactory::getConfig();
 		$doc    = JFactory::getDocument();
+		$menu   = $app->getMenu();
 		$option = JRequest::getVar('option', '');
 		$view   = JRequest::getVar('view', '');
 		$scope  = $option . '.' . $view;
 
-		//TODO: Do we want to use site configuration data for featured view or default menu item?
+		//Ensure that we are not in the back-end
+		if ($app->isAdmin()) {
+			return true;
+		}
 
-		// Ensure that we are not in the back-end, or haven't run before in category views, and are in the right scope. Phew!
-		if (!$app->isAdmin() && ($count == 0) && (in_array($scope, array('com_content.article', 'com_content.category', 'com_content.featured')))) {
+		// Use global config data for default menu item
+		if ($menu->getActive() == $menu->getDefault()) {
+
+			// The canonical URL of the page.
+			$doc->setMetadata('og:url', JURI::current());
+
+			// The type of object.
+			$doc->setMetadata('og:type', 'website');
+
+			// The name of the overall site.
+			$doc->setMetadata('og:site_name', htmlspecialchars($config->get('sitename')));
+
+			// The title of the site.
+			$doc->setMetadata('og:title', htmlspecialchars($config->get('sitename')));
+
+			// The description of the site.
+			$doc->setMetadata('og:description', htmlspecialchars($config->get('MetaDesc')));
+
+		// Ensure we we haven't executed before and are in the right scope.
+		} elseif (($count == 0) && (in_array($scope, array('com_content.article', 'com_content.category', 'com_content.featured')))) {
 
 			// The canonical URL of the page.
 			$doc->setMetadata('og:url', JURI::current());
