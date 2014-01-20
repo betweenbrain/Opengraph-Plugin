@@ -73,6 +73,8 @@ class plgContentBbOpenGraph extends JPlugin
 
 			// A description of the object.
 			if (isset($row->introtext)) {
+				// Sanitize introtext of other plugin shortcodes
+				$row->introtext = preg_replace("/{[^}]*}/i", " ", $row->introtext);
 				// First 255 characters of the introtext, sans HTML, with extra spaces removed.
 				$description = preg_replace("/\s{2,}/", " ", substr(strip_tags($row->introtext), 0, 255));
 				$doc->setMetadata('og:description', $description . '...');
