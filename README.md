@@ -24,7 +24,7 @@ Learn more about The Open Graph Protocol at http://ogp.me/
 * Joomla 2.5.19 / 3.2.3 or later.
 
 ## Support
-* Please visit the (issues page)[https://github.com/betweenbrain/Opengraph-Plugin/issues] for this project.
+* Please visit the [issues page](https://github.com/betweenbrain/Opengraph-Plugin/issues) for this project.
 
 ## Stable Master Branch Policy
 The master branch will, at all times, remain stable. Development for new features will occur in branches, and when ready, will be merged into the master branch.
