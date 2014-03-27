@@ -32,7 +32,7 @@ The master branch will, at all times, remain stable. Development for new feature
 In the event features have already been merged for the next release series, and an issue arises that warrants a fix on the current release series, the developer will create a branch based off the tag created from the previous release, make the necessary changes, package a new release, and tag the new release. If necessary, the commits made in the temporary branch will be merged into master.
 
 ## Branch Schema
-* __master__ :  stable at all times, containing the latest tagged release for Joomla 2.5 and 3.x.
+* __master__:  stable at all times, containing the latest tagged release for Joomla 2.5 and 3.x.
 * __develop__: the latest version in development for Joomla 2.5 and 3.x. This is the branch to base all pull requests on.
 
 ## Contributing
