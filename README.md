@@ -4,14 +4,14 @@ A simple Joomla 2.5/ 3.x plugin that automatically implements the Open Graph pro
 ## Usage
 Automatically adds the following basic metadata, from the indicated sources, when the viewing pages of the following menu item types:
 
-** Homepage (default menu item) **
+**Homepage (default menu item)**
 * `og:url:` the URL of the default menu item
 * `og:type: website`
 * `og:site_name:` the global configuration sitename
 * `og:title:` the global configuration sitename
 * `og:description: ` the global configuration meta description
 
-** Single article, blog, and featured article menu type **
+**Single article, blog, and featured article menu type**
 * `og:url:` the URL of page being viewed
 * `og:type: article`
 * `og:title:` the title associated with the menu item being viewed
